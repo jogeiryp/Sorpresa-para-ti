@@ -1,0 +1,420 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-1: #f8f1df;
+  --bg-2: #f6ecd3;
+  --yellow-main: #f4cf4d;
+  --yellow-soft: #ffe27b;
+  --yellow-shadow: #e3bb2f;
+  --brown-main: #8e5619;
+  --brown-ring: #b06d22;
+  --green-main: #319647;
+  --green-soft: #48b85f;
+  --card: rgba(255, 250, 243, 0.92);
+  --card-border: #e5d5bb;
+  --text: #8a5421;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Georgia, serif;
+  background:
+    radial-gradient(circle at top, #fff8ea 0%, transparent 35%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-2));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 15px;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.bg-decoration {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(10px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.deco-1 {
+  width: 220px;
+  height: 220px;
+  background: rgba(255, 227, 140, 0.5);
+  top: 40px;
+  left: 80px;
+}
+
+.deco-2 {
+  width: 260px;
+  height: 260px;
+  background: rgba(255, 255, 255, 0.45);
+  right: 60px;
+  bottom: 70px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 34px;
+}
+
+.flower-scene {
+  position: relative;
+  width: 340px;
+  height: 460px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flower-shadow {
+  position: absolute;
+  bottom: 24px;
+  width: 130px;
+  height: 22px;
+  background: rgba(120, 88, 34, 0.14);
+  border-radius: 50%;
+  filter: blur(6px);
+}
+
+.flower {
+  position: relative;
+  width: 320px;
+  height: 430px;
+  animation: floatFlower 4s ease-in-out infinite;
+}
+
+/* pétalos */
+.petal-wrap {
+  position: absolute;
+  left: 50%;
+  top: 145px;
+  width: 0;
+  height: 0;
+}
+
+.petal {
+  position: relative;
+  width: 86px;
+  height: 118px;
+  transform: translate(-50%, -50%) translateY(-95px);
+  background: linear-gradient(
+    180deg,
+    var(--yellow-soft) 0%,
+    var(--yellow-main) 62%,
+    var(--yellow-shadow) 100%
+  );
+  border-radius: 50% 50% 42% 42%;
+  box-shadow:
+    inset -6px -8px 0 rgba(227, 187, 47, 0.35),
+    inset 8px 10px 0 rgba(255, 241, 180, 0.35);
+}
+
+.petal::after {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 18px;
+  width: 20px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 248, 210, 0.45);
+  transform: rotate(-18deg);
+  filter: blur(1px);
+}
+
+.p1 { transform: rotate(0deg); }
+.p2 { transform: rotate(45deg); }
+.p3 { transform: rotate(90deg); }
+.p4 { transform: rotate(135deg); }
+.p5 { transform: rotate(180deg); }
+.p6 { transform: rotate(225deg); }
+.p7 { transform: rotate(270deg); }
+.p8 { transform: rotate(315deg); }
+
+/* centro */
+.center {
+  position: absolute;
+  left: 50%;
+  top: 145px;
+  width: 98px;
+  height: 98px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 35% 35%, #9b5d1a 0%, var(--brown-main) 68%);
+  border: 7px solid var(--brown-ring);
+  border-radius: 50%;
+  z-index: 3;
+  box-shadow:
+    0 5px 12px rgba(94, 51, 12, 0.18),
+    inset 6px 6px 0 rgba(255, 191, 101, 0.08);
+}
+
+/* tallo */
+.stem {
+  position: absolute;
+  left: 50%;
+  top: 190px;
+  width: 14px;
+  height: 190px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, var(--green-soft), var(--green-main));
+  border-radius: 10px;
+  z-index: 1;
+}
+
+/* hojas */
+.leaf {
+  position: absolute;
+  top: 255px;
+  width: 74px;
+  height: 36px;
+  background: linear-gradient(180deg, #53c76b, #35a94e);
+  z-index: 2;
+  box-shadow: inset 0 -4px 0 rgba(32, 122, 52, 0.18);
+}
+
+.leaf-left {
+  left: 88px;
+  border-radius: 0 100% 0 100%;
+  transform: rotate(-12deg);
+}
+
+.leaf-right {
+  right: 88px;
+  border-radius: 100% 0 100% 0;
+  transform: rotate(12deg);
+}
+
+/* brillos */
+.sparkle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 250, 225, 0.95);
+  border-radius: 50%;
+  box-shadow: 0 0 14px rgba(255, 245, 190, 0.9);
+  animation: twinkle 2.6s ease-in-out infinite;
+}
+
+.sparkle::before,
+.sparkle::after {
+  content: "";
+  position: absolute;
+  background: rgba(255, 250, 225, 0.9);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.sparkle::before {
+  width: 2px;
+  height: 18px;
+  border-radius: 4px;
+}
+
+.sparkle::after {
+  width: 18px;
+  height: 2px;
+  border-radius: 4px;
+}
+
+.sparkle-1 {
+  top: 55px;
+  left: 72px;
+  animation-delay: 0s;
+}
+
+.sparkle-2 {
+  top: 88px;
+  right: 58px;
+  animation-delay: 0.8s;
+}
+
+.sparkle-3 {
+  top: 220px;
+  right: 38px;
+  animation-delay: 1.4s;
+}
+
+/* ========== CARTA MEJORADA ========== */
+.letter {
+  width: 900px;
+  max-width: 92vw;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 20px 40px rgba(94, 71, 38, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.letter:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 28px 48px rgba(94, 71, 38, 0.18);
+}
+
+.letter-inner {
+  background: linear-gradient(135deg, #fffef9 0%, #fffaf3 100%);
+  border-radius: 28px;
+  padding: 40px 48px;
+  position: relative;
+  border: 1px solid #f0e3d0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+/* Encabezado de la carta */
+.letter-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 2px dashed #f0dbb4;
+}
+
+.heart-icon {
+  font-size: 1.6rem;
+  animation: gentleBeat 2s ease-in-out infinite;
+}
+
+@keyframes gentleBeat {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+.title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--brown-main);
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #b06d22, #8e5619);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Contenido */
+.letter-content {
+  font-family: 'Inter', Georgia, serif;
+}
+
+.letter-content p {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: #5e3a1a;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.letter-content p:first-of-type {
+  margin-top: 0;
+}
+
+.signature {
+  margin-top: 32px;
+  text-align: right;
+  font-style: italic;
+  color: #b87a3a;
+  font-size: 0.95rem;
+  padding-top: 16px;
+  border-top: 1px solid #f0e0c8;
+}
+
+.signature-name {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--brown-main);
+  display: inline-block;
+  margin-top: 6px;
+  font-style: normal;
+}
+
+/* Pie de carta */
+.letter-footer {
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 1.2rem;
+  color: #d4a373;
+  opacity: 0.6;
+}
+
+/* animaciones */
+@keyframes floatFlower {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* responsive */
+@media (max-width: 600px) {
+  .flower-scene {
+    width: 280px;
+    height: 390px;
+  }
+
+  .flower {
+    transform: scale(0.85);
+    transform-origin: center top;
+  }
+
+  .flower {
+    animation: none;
+  }
+
+  .letter-inner {
+    padding: 28px 24px;
+  }
+
+  .letter-header {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .heart-icon {
+    font-size: 1.2rem;
+  }
+
+  .letter-content p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .signature-name {
+    font-size: 1.1rem;
+  }
+
+  .letter-footer {
+    margin-top: 20px;
+    font-size: 1rem;
+  }
+}
